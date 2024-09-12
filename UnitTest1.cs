@@ -15,6 +15,28 @@ public class UnitTest1
     //PRUEBAS UNITARIAS DEL PROBLEMA 1 - MEZCLAR LISTAS
     //
 
+
+    [TestMethod]
+    //prueba de entrada ascendente. 
+    //Devuelve la mezcla de ambas en ascendente (0,2,3,7,10,40)
+
+    public void TestMethod_Mezclar_Asc()
+    {
+        ListaDoble list1 = new ListaDoble();
+        list1.InsertInOrder(0);
+        list1.InsertInOrder(2);
+        list1.InsertInOrder(10);
+
+        ListaDoble list2 = new ListaDoble();
+        list2.InsertInOrder(3);
+        list2.InsertInOrder(7);
+        list2.InsertInOrder(40);
+
+        
+
+        
+    }
+
     //
     //PRUEBAS UNITARIAS DEL PROBLEMA 2 - INVERTIR LISTA
     //
