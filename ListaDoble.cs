@@ -262,5 +262,77 @@ public class ListaDoble
         }
     } 
 
+    // Metodo para fusionar dos listas
+    public void 
+    MergeSorted(ListaDoble listA, ListaDoble listB, SortDirection direction)
+    {
+        //creamos una lista donde almacenar la fusion y nodos para recorrer cada lista
+        ListaDoble mergedList = new ListaDoble();
+        Nodo currentA = listA.head;
+        Nodo currentB = listB.head;
+
+        //fusion en orden ascendente
+        if (direction == SortDirection.Ascending)
+        {
+           while(currentA != null) //recorremos todo el nodo, agregamos en orden
+           {
+            mergedList.InsertInOrder(currentA.Data);
+            currentA = currentA.Next;
+           }
+
+           while(currentB != null)//recorremos todo el nodo, agregamos en orden
+           {
+            mergedList.InsertInOrder(currentB.Data);
+            currentB = currentB.Next;
+           }
+        }
+        else if (direction == SortDirection.Descending)
+        {
+            //fusion en orden descendente
+            while(currentA != null) //recorremos todo el nodo, agregamos en orden
+           {
+            mergedList.InsertInOrder(currentA.Data);
+            currentA = currentA.Next;
+           }
+
+           while(currentB != null)//recorremos todo el nodo, agregamos en orden
+           {
+            mergedList.InsertInOrder(currentB.Data);
+            currentB = currentB.Next;
+           }
+
+            // como la lista estara ascendente pero la queremos descendente, la invertimos
+            mergedList.Invertir();
+        }
+
+        //finalmente, asignamos la cabeza y cola de la lista creada a nuestra lista b
+        //asi la lista b ha sido mezclada en la lista 1
+
+        this.head = mergedList.head;
+        this.cola = mergedList.cola;
+    }
+
+
+    //Metodo usado para comparar dos listas. Usado para el testing
+    public bool Comparar(ListaDoble otraLista)
+{
+    Nodo currentA = this.head;
+    Nodo currentB = otraLista.head;
+
+    while (currentA != null && currentB != null)
+    {
+        if (currentA.Data != currentB.Data) 
+        {
+            return false; // Los valores no coinciden
+        }
+        
+        currentA = currentA.Next;
+        currentB = currentB.Next;
+    }
+
+    // Si una lista es más larga que la otra o en efecto son iguales
+    return true;
+}
+
 }
 }
