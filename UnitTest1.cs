@@ -13,6 +13,33 @@ public class UnitTest1
 
     //PRUEBAS UNITARIAS DEL PROBLEMA 2 - INVERTIR LISTA
 
+    [TestMethod]
+    //prueba de entrada 1
+    public void TestMethod_Invertir0_1_2_30_50()
+    {
+
+        //lista a testear
+
+        ListaDoble list = new ListaDoble();
+
+        list.InsertInOrder(1);
+        list.InsertInOrder(0);
+        list.InsertInOrder(30);
+        list.InsertInOrder(50);
+        list.InsertInOrder(2);
+        list.Invertir();
+        ListaDoble resultado = list;
+
+        //lista de testing creada sin orden
+        ListaDoble listTest = new ListaDoble();
+        
+        
+
+        Assert.AreEqual(listTest, resultado);
+        Console.WriteLine($"Resultado obtenido correctamente: {listTest}");
+
+    }
+
     //PRUEBAS UNITARIAS DEL PROBLEMA 3 - GET MIDDLE
     [TestMethod]
     //prueba de excepcion vacia 
