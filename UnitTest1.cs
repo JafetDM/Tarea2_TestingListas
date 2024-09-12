@@ -11,10 +11,64 @@ public class UnitTest1
 // en las pruebas unitarias, definimos el resultado esperado y lo comparamos con AreEqual
 {
 
+    //
+    //PRUEBAS UNITARIAS DEL PROBLEMA 1 - MEZCLAR LISTAS
+    //
+
+    //
     //PRUEBAS UNITARIAS DEL PROBLEMA 2 - INVERTIR LISTA
+    //
 
     [TestMethod]
-    //prueba de entrada 1
+    //prueba de entrada una lista vacia. Devuelve una lista vacia.
+    public void TestMethod_Invertir_Vacio()
+    {
+        //lista a testear
+
+        ListaDoble list = new ListaDoble();
+        list.Invertir();
+        ListaDoble resultado = list;
+
+        //lista para probar
+        ListaDoble prueba = new ListaDoble();
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se invirtio correctamente");
+        Console.WriteLine("Resultado esperado: ");
+        prueba.PrintList();
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+        
+    }
+
+    [TestMethod]
+    //prueba de entrada 2. Devuelve 2
+    public void TestMethod_Invertir2()
+    {
+
+        //lista a testear
+
+        ListaDoble list = new ListaDoble();
+
+        list.InsertInOrder(2);
+        list.Invertir();
+        ListaDoble resultado = list;
+
+        //lista de testing creada sin orden
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertarF(2);
+        
+        
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se invirtio correctamente");
+        Console.WriteLine("Resultado esperado: ");
+        prueba.PrintList();
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+
+    }
+
+    [TestMethod]
+    //prueba de entrada 0,1,2,30,50. Devuelve 50,30,2,1,0
     public void TestMethod_Invertir0_1_2_30_50()
     {
 
@@ -31,18 +85,28 @@ public class UnitTest1
         ListaDoble resultado = list;
 
         //lista de testing creada sin orden
-        ListaDoble listTest = new ListaDoble();
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertarF(50);
+        prueba.InsertarF(30);
+        prueba.InsertarF(2);
+        prueba.InsertarF(1);
+        prueba.InsertarF(0);
         
         
-
-        Assert.AreEqual(listTest, resultado);
-        Console.WriteLine($"Resultado obtenido correctamente: {listTest}");
+        Console.WriteLine("Resultado esperado: ");
+        prueba.PrintList();
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se invirtio correctamente");
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
 
     }
-
+    
+    //
     //PRUEBAS UNITARIAS DEL PROBLEMA 3 - GET MIDDLE
+    //
+
     [TestMethod]
-    //prueba de excepcion vacia 
+    //prueba de entrada lista vacia. Devuelve una excepcion por vacia
     //Get Middle se definio para que tire una excepcion si la lista es vacia
     public void TestMethod_GetMiddle_Vacio()
     {
@@ -66,7 +130,7 @@ public class UnitTest1
     }
 
     [TestMethod]
-    //prueba de entrada 1
+    //prueba de entrada 1. Devuelve 1
     public void TestMethod_GetMiddle1()
     {
 
@@ -81,7 +145,7 @@ public class UnitTest1
     }
 
     [TestMethod]
-    //prueba de entrada 1,2
+    //prueba de entrada 1,2. Devuelve 2
     public void TestMethod_GetMiddle1_2()
     {
 
@@ -97,7 +161,7 @@ public class UnitTest1
     }
 
     [TestMethod]
-    //prueba de entrada 0,1,2
+    //prueba de entrada 0,1,2. Devuelve 1
     public void TestMethod_GetMiddle0_1_2()
     {
 
@@ -114,7 +178,7 @@ public class UnitTest1
     }
 
     [TestMethod]
-    //prueba de entrada 0,1,2,3
+    //prueba de entrada 0,1,2,3. Devuelve 2
     public void TestMethod_GetMiddle0_1_2_3()
     {
 
