@@ -6,6 +6,12 @@ using System.Transactions;
 namespace ListasEnlazadas
 {
 
+    public enum SortDirection //enum utilizado para dar direccion
+{
+    Ascending,
+    Descending
+}
+
 public class Nodo
 {
 
@@ -99,6 +105,66 @@ public class ListaDoble
         ActualizaMedio(auxiliar); //actualiza el elemento central
     }
 
+    public void DeleteFirst()
+    {
+        if (head == null) //si esta vacia
+        {
+            throw new InvalidOperationException
+            ("La lista está vacía. No se puede eliminar el primer elemento.");
+        }
+
+        else if (head == cola) //si solo tiene un elemento
+        {
+            contador = contador - 1;
+            head = null;
+            cola = null;
+        }
+
+        else
+        {
+            contador = contador -1;
+            head = head.Next;
+            head.Prev = null;
+        }
+
+        // Actualizar el nodo central
+        if (contador % 2 == 0)
+        {
+            Middle = Middle.Next;
+        }
+    }
+
+    public void DeleteLast()
+    {
+        if (head == null) //si esta vacia
+        {
+            throw new 
+            InvalidOperationException
+            ("La lista está vacía. No se puede eliminar el primer elemento.");
+        }
+
+        else if (head == cola) //si solo hay un elemento
+        {
+            contador --;
+            head = null;
+            cola = null;
+        }
+
+        else
+        {
+            contador --;
+            cola = cola.Prev;
+            cola.Next = null;
+        }
+
+        // Actualizar el nodo central
+        if (contador % 2 != 0)
+        {
+            Middle = Middle.Prev;
+        }
+
+    }
+
     private void ActualizaMedio(Nodo auxiliar)
     {
         if (contador == 1) //solo hay un elemento
@@ -151,7 +217,50 @@ public class ListaDoble
         Console.WriteLine();
     }
 
+    public void Invertir()
+    {
+        Nodo current = head; // Nodo para recorrer la lista
+        Nodo temp = null; // Nodo temporal para intercambiar punteros
+
+        // Intercambiar los punteros Next y Prev de cada nodo
+        while (current != null)
+        {
+            temp = current.Prev; // Guardar el puntero Prev
+            current.Prev = current.Next; // Cambiar Prev al Next
+            current.Next = temp; // Cambiar Next al puntero anterior (guardado en temp)
+
+            // Mover al siguiente nodo
+            current = current.Prev; // Como hemos intercambiado, current.Prev es el siguiente nodo
+        }
+
+        // Ajustar head y tail (cola)
+        if (temp != null)
+        {
+            head = temp.Prev; // temp apunta al nodo previo al antiguo head
+            cola = head;      // cola es el nuevo head, ya que hemos invertido
+        }
+    }
+
+    public void InsertarF(int data) //metodo que inserta al final para crear 
+    //una lista sin orden, solo es usada para testing
+    {
+        Nodo auxiliar = new Nodo(data);
+        contador ++;
+
+        if (head == null) //si la lista esta vacia
+        {
+            head = auxiliar;
+            cola = auxiliar;
+        }
+
+        else
+        {
+            cola.Next = auxiliar; //establece el ultimo nodo despues de la cola
+            auxiliar.Prev = cola; //convierte la cola en el previo del auxiliar
+            cola = auxiliar; // convierte al auxiliar en la nueva cola
+
+        }
+    } 
+
 }
-
-
 }
