@@ -17,11 +17,17 @@ public class UnitTest1
 
 
     [TestMethod]
-    //prueba de entrada ascendente. 
+    //prueba de entrada (ambos ascendente) con salida ascendente. 
+    //mezcla (0,2,10) con (3,7,40)
     //Devuelve la mezcla de ambas en ascendente (0,2,3,7,10,40)
 
     public void TestMethod_Mezclar_Asc()
     {
+
+        //lista vacia
+        ListaDoble resultado = new ListaDoble();
+
+        //listas a mezclar
         ListaDoble list1 = new ListaDoble();
         list1.InsertInOrder(0);
         list1.InsertInOrder(2);
@@ -32,9 +38,70 @@ public class UnitTest1
         list2.InsertInOrder(7);
         list2.InsertInOrder(40);
 
-        
+        list2.MergeSorted(list1, list2, SortDirection.Ascending);
 
-        
+        resultado = list2;
+
+        //lista de prueba para comparar resultados
+
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertInOrder(0);
+        prueba.InsertInOrder(2);
+        prueba.InsertInOrder(3);
+        prueba.InsertInOrder(7);
+        prueba.InsertInOrder(10);
+        prueba.InsertInOrder(40);
+
+        Console.WriteLine("Resultado esperado es: ");
+        prueba.PrintList();
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se mezclo correctamente");
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+
+    }
+
+    [TestMethod]
+    //prueba de entrada (ambos ascendente) con salida descendente.
+    //mezcla (10, 15) con (9, 40, 50)
+    //Devuelve la mezcla de ambas en descendente (50, 40, 15, 10, 9)
+
+    public void TestMethod_Mezclar_Des()
+    {
+
+        //lista vacia
+        ListaDoble resultado = new ListaDoble();
+
+        //listas a mezclar
+        ListaDoble list1 = new ListaDoble();
+        list1.InsertInOrder(10);
+        list1.InsertInOrder(15);
+
+        ListaDoble list2 = new ListaDoble();
+        list2.InsertInOrder(9);
+        list2.InsertInOrder(50);
+        list2.InsertInOrder(40);
+
+        list2.MergeSorted(list1, list2, SortDirection.Ascending);
+
+        resultado = list2;
+
+        //lista de prueba para comparar resultados
+
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertInOrder(9);
+        prueba.InsertInOrder(10);
+        prueba.InsertInOrder(40);
+        prueba.InsertInOrder(50);
+        prueba.InsertInOrder(15);
+
+        Console.WriteLine("Resultado esperado es: ");
+        prueba.PrintList();
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se mezclo correctamente");
+
     }
 
     //
