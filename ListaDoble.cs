@@ -50,7 +50,7 @@ public class ListaDoble
         contador = 0;
     }
 
-    public void InsertInOrder(int data)
+    public void InsertInOrder(int data) //inserta en orden
     {
         Nodo auxiliar = new Nodo(data);
         contador ++;
@@ -105,7 +105,7 @@ public class ListaDoble
         ActualizaMedio(auxiliar); //actualiza el elemento central
     }
 
-    public void DeleteFirst()
+    public void DeleteFirst() //elimina el primero 
     {
         if (head == null) //si esta vacia
         {
@@ -134,7 +134,7 @@ public class ListaDoble
         }
     }
 
-    public void DeleteLast()
+    public void DeleteLast() //elimina el ultimo
     {
         if (head == null) //si esta vacia
         {
@@ -165,7 +165,7 @@ public class ListaDoble
 
     }
 
-    private void ActualizaMedio(Nodo auxiliar)
+    private void ActualizaMedio(Nodo auxiliar) //actualza el nodo del medio con cada insersion
     {
         if (contador == 1) //solo hay un elemento
         {
@@ -196,7 +196,7 @@ public class ListaDoble
 
     }
 
-    public int GetMiddle()
+    public int GetMiddle() //devuelve el nodo en el medio
     {
        if (Middle != null)
         {
@@ -206,7 +206,7 @@ public class ListaDoble
         throw new InvalidOperationException("lista esta vacia");
     }
 
-    public void PrintList ()
+    public void PrintList () //imprime la lista
     {
         Nodo auxiliar = head;
         while (auxiliar != null)
@@ -217,7 +217,7 @@ public class ListaDoble
         Console.WriteLine();
     }
 
-    public void Invertir()
+    public void Invertir() //invierte la lsta
     {
         Nodo current = head; // Nodo para recorrer la lista
         Nodo temp = null; // Nodo temporal para intercambiar punteros
@@ -333,6 +333,43 @@ public class ListaDoble
     // Si una lista es más larga que la otra o en efecto son iguales
     return true;
 }
+
+    public bool DeleteValue(int value) // devuelve true si encuentra y elimina un valor especifico
+    {
+        Nodo current = head;
+        
+        while (current.Next != null) //recorre toda la lista
+        {
+            if (value == current.Data) //si encuentra un valor igual
+            {
+                //si el nodo a eliminar es la cabeza
+                if (current == head)
+                {
+                    head =head.Next;
+                }
+
+                //si el nodo a eliminar es la cola
+                if (current == cola)
+                {
+                    cola = cola.Prev;
+                }
+
+                else//si el nodo esta en el medio
+                {
+                    //agarra el puntero next del previo y salta al siguiente nodo
+                    current.Prev.Next = current.Next; 
+                    //tma el puntero prev del next y salta al nodo previo
+                    current.Next.Prev = current.Prev;
+                }
+
+                return true;
+            }
+
+            current = current.Next; //recorre al siguiente nodo
+        }
+
+        return false;
+    }
 
 }
 }
