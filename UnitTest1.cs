@@ -11,9 +11,89 @@ public class UnitTest1
 // en las pruebas unitarias, definimos el resultado esperado y lo comparamos con AreEqual
 {
 
+    //por como la lista esta definida, no aceptara valores que no sean int, 
+    //por lo tanto no hae falta verificarlo. Lo mismo con null, siempre pide un parametro.
+
     //
     //PRUEBAS UNITARIAS DEL PROBLEMA 1 - MEZCLAR LISTAS
     //
+
+    [TestMethod]
+    //prueba de entrada (uno vacio, otro ascendente) con salida descendente. 
+    //mezcla (9,40,50) con ()
+    //Devuelve la mezcla de ambas en descendente (50,40,9)
+
+    public void TestMethod_Mezclar_Desc_Vacio()
+    {
+
+        //lista vacia
+        ListaDoble resultado = new ListaDoble();
+
+        //listas a mezclar
+        ListaDoble list1 = new ListaDoble(); //vacia
+
+        ListaDoble list2 = new ListaDoble(); 
+        list2.InsertInOrder(9);
+        list2.InsertInOrder(40);
+        list2.InsertInOrder(50);
+
+        list2.MergeSorted(list1, list2, SortDirection.Descending);
+
+        resultado = list2;
+
+        //lista de prueba para comparar resultados
+
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertInOrder(9);
+        prueba.InsertInOrder(40);
+        prueba.InsertInOrder(50);
+        prueba.Invertir();
+
+        Console.WriteLine("Resultado esperado es: ");
+        prueba.PrintList();
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se mezclo correctamente");
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+
+    }
+
+    [TestMethod]
+    //prueba de entrada (uno vacio, otro ascendente) con salida ascendente. 
+    //mezcla (10,15) con ()
+    //Devuelve la mezcla de ambas en ascendente (10,15)
+
+    public void TestMethod_Mezclar_Asc_Vacio()
+    {
+
+        //lista vacia
+        ListaDoble resultado = new ListaDoble();
+
+        //listas a mezclar
+        ListaDoble list1 = new ListaDoble();
+        list1.InsertInOrder(15);
+        list1.InsertInOrder(10);
+
+        ListaDoble list2 = new ListaDoble(); //vacia
+
+        list2.MergeSorted(list1, list2, SortDirection.Ascending);
+
+        resultado = list2;
+
+        //lista de prueba para comparar resultados
+
+        ListaDoble prueba = new ListaDoble();
+        prueba.InsertInOrder(10);
+        prueba.InsertInOrder(15);
+
+        Console.WriteLine("Resultado esperado es: ");
+        prueba.PrintList();
+
+        Assert.IsTrue(resultado.Comparar(prueba), "la lista no se mezclo correctamente");
+        Console.WriteLine("Resultado obtenido: ");
+        resultado.PrintList();
+
+    }
 
 
     [TestMethod]
